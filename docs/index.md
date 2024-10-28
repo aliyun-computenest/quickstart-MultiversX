@@ -22,7 +22,7 @@ Configure the necessary parameters for the instance
 Service Instance Name: Provide a meaningful name for the instance.
 Instance Password: Create a secure password for the instance.
 
-## Step 4: Deploy Your RAG Service
+## Step 4: Deploy Your Service
 Review all configurations and accept the Terms of Service. Click Create Now to deploy your service.
 
 ## Step 5: Integrate with the MultiversX Network
