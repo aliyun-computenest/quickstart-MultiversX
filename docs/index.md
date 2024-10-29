@@ -1,131 +1,53 @@
-# Demo服务实例部署文档
+# MultiversX Snapshotless Observing Squad Deployment Guide
 
-## 概述
+This tutorial provides a step-by-step guide to setting up a MultiversX Snapshotless Observing Squad using Alibaba Cloud Compute Nest, and ECS. 
 
-`(服务概述内容)`。
+## Introduction
 
+## Prerequisites
+Before starting, ensure you have:
+
+An active Alibaba Cloud account.
+Familiarity with cloud services.
+
+## Step 1: Alibaba Cloud Account Setup
+If you haven't already, sign up for an Alibaba Cloud account: Sign up (https://www.alibabacloud.com).
+
+## Step 2: Access Compute Nest
+Navigate to Compute Nest and locate the service for MultiversX Snapshotless Observing Squad
+
+## Step 3: Set Up an Instance and Its Parameters
+Configure the necessary parameters for the instance
+
+Service Instance Name: Provide a meaningful name for the instance.
+Instance Password: Create a secure password for the instance.
+
+## Step 4: Deploy Your Service
+Review all configurations and accept the Terms of Service. Click Create Now to deploy your service.
+
+## Step 5: Integrate with the MultiversX Network
+Description:
+In order to integrate with the MultiversX Network and be able to broadcast transactions and query blockchain data in an optimized approach, one needs to set up an on-premises Observing Squad. An Observing Squad is defined as a set of N Observer Nodes (one for each Shard, including the Metachain) plus an MultiversX Proxy instance which will connect to these Observers and provide an HTTP API (by delegating requests to the Observers).
+The snapshotless mode allows you to quickly synchronize with the network and perform Rest API calls for retrieving real-time data from the blockchain, such as getting data of an address (GET /address/${address}), getting the balance of an address (GET /address/${address}/balance), sending transactions, performing Smart Contract Queries and many more .
+Full List of supported Operations can be found here : https://docs.multiversx.com/sdk-and-tools/proxy/#snaphotless-observers-support
+
+Getting started after deploying MultiversX Observing Squad
+A systemd service will start docker compose and run all the Multiversx Observers shards in snapshotless mode .
+Make sure to allow port 22 and 8079 in your security group settings.
+The following tools are available at this path : /opt/multiversx-observing-squad-tools/
 ```
-eg：
-
-Demo服务是计算巢提供的示例。
-本文向您介绍如何开通计算巢上的`Demo`服务，以及部署流程和使用说明。
+./stop_stack.sh      #-- stops the observing squad stack
+./start_stack.sh     #-- starts the observing squad stack
+./check_stack_sync_status.sh    #-- get node syncronization status
+./check_stack_node_version.sh   #-- get stack version information
+./upgrade_stack.sh   #-- upgrade stack version
 ```
-
-## 计费说明
-
-`(计费说明内容)`
-
+Once the stack is in sync you can query the proxy for information :
 ```
-eg:
-
-Demo在计算巢上的费用主要涉及：
-
-- 所选vCPU与内存规格
-- 系统盘类型及容量
-- 公网带宽
-
-计费方式包括：
-
-- 按量付费（小时）
-- 包年包月
-
-目前提供如下实例：
-
-| 规格族 | vCPU与内存 | 系统盘 | 公网带宽 |
-| --- | --- | --- | --- |
-| ecs.r6.xlarge | 内存型r6，4vCPU 32GiB | ESSD云盘 200GiB PL0 | 固定带宽1Mbps |
-
-预估费用在创建实例时可实时看到。
-如需更多规格、其他服务（如集群高可用性要求、企业级支持服务等），请联系我们 [mailto:xx@xx.com](mailto:xx@xx.com)。
-
+curl -s -k localhost:8079/network/config
 ```
+Or via the public ip address of your instance on port 8079.
+Full list of supported operations in snapshotless mode can be found here: https://docs.multiversx.com/sdk-and-tools/proxy/#snaphotless-observers-support
 
-## 部署架构
-
-`(部署概述内容)`
-
-## RAM账号所需权限
-
-`(权限策略内容)`
-
-```
-eg: 
-
-Demo服务需要对ECS、VPC等资源进行访问和创建操作，若您使用RAM用户创建服务实例，需要在创建服务实例前，对使用的RAM用户的账号添加相应资源的权限。添加RAM权限的详细操作，请参见[为RAM用户授权](https://help.aliyun.com/document_detail/121945.html)。所需权限如下表所示。
-
-
-| 权限策略名称 | 备注 |
-| --- | --- |
-| AliyunECSFullAccess | 管理云服务器服务（ECS）的权限 |
-
-```
-
-## 部署流程
-
-### 部署步骤
-
-`(部署步骤内容)`
-
-```
-eg:
-
-1. 单击部署链接，进入服务实例部署界面，根据界面提示，填写参数完成部署。
-2. 补充示意图。
-```
-### 部署参数说明
-
-`(部署参数说明内容)`
-
-```
-eg:
-
-您在创建服务实例的过程中，需要配置服务实例信息。下文介绍云XR实时渲染平台服务实例输入参数的详细信息。
-
-| 参数组 | 参数项 | 示例 | 说明 |
-| --- | --- | --- | --- |
-| 服务实例名称 |  | test | 实例的名称 |
-| 地域 |  | 华北2（北京） | 选中服务实例的地域，建议就近选中，以获取更好的网络延时。 |
-```
-
-### 验证结果
-
-`(验证结果内容)`
-
-```
-eg:
-
-1. 查看服务实例。服务实例创建成功后，部署时间大约需要2分钟。部署完成后，页面上可以看到对应的服务实例。 
-2. 通过服务实例访问TuGraph。进入到对应的服务实例后，可以在页面上获取到web、rpc、ssh共3种使用方式。
-```
-
-### 使用Demo
-
-`(服务使用说明内容)`
-
-```
-eg:
-
-请访问Demo官网了解如何使用：[使用文档](https://www.aliyun.com)
-```
-
-## 问题排查
-
-`(服务使用说明内容)`
-
-```
-eg:
-
-请访问[Demo的问题排查链接](https://www.aliyun.com)获取帮助。
-```
-
-## 联系我们
-
-欢迎访问Demo官网（[https://www.aliyun.com](https://www.aliyun.com)）了解更多信息。
-
-联系邮箱：[https://www.aliyun.com](mailto:https://www.aliyun.com)
-
-社区版开源地址：[https://github.com/](https://github.com/)
-
-扫码关注微信公众号，技术博客、活动通知不容错过：
-
-`(添加二维码图片)`
+## Conclusion
+This tutorial has guided you through the comprehensive process of building a MultiversX Snapshotless Observing Squad service using Alibaba Cloud Compute Nest, and ECS. Following these steps will help you to quickly deploy MultiversX Snapshotless Observing Squad services on Alibaba Cloud
