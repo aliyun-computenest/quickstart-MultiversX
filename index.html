@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>MultiversX Snapshotless Observing Squad Deployment Guide - Aliyun 计算巢 x Demo</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="search/main.js"></script>
+  
+
+  
+
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#multiversx-snapshotless-observing-squad-deployment-guide">MultiversX Snapshotless Observing Squad Deployment Guide</a></li>
+              
+                  <li><a href="#introduction">Introduction</a></li>
+                  
+              
+                  <li><a href="#prerequisites">Prerequisites</a></li>
+                  
+              
+                  <li><a href="#step-1-alibaba-cloud-account-setup">Step 1: Alibaba Cloud Account Setup</a></li>
+                  
+              
+                  <li><a href="#step-2-access-compute-nest">Step 2: Access Compute Nest</a></li>
+                  
+              
+                  <li><a href="#step-3-set-up-an-instance-and-its-parameters">Step 3: Set Up an Instance and Its Parameters</a></li>
+                  
+              
+                  <li><a href="#step-4-deploy-your-service">Step 4: Deploy Your Service</a></li>
+                  
+              
+                  <li><a href="#step-5-integrate-with-the-multiversx-network">Step 5: Integrate with the MultiversX Network</a></li>
+                  
+              
+                  <li><a href="#conclusion">Conclusion</a></li>
+                  
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <h1 id="multiversx-snapshotless-observing-squad-deployment-guide">MultiversX Snapshotless Observing Squad Deployment Guide</h1>
+<p>This tutorial provides a step-by-step guide to setting up a MultiversX Snapshotless Observing Squad using Alibaba Cloud Compute Nest, and ECS. </p>
+<h2 id="introduction">Introduction</h2>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before starting, ensure you have:</p>
+<p>An active Alibaba Cloud account.
+Familiarity with cloud services.</p>
+<h2 id="step-1-alibaba-cloud-account-setup">Step 1: Alibaba Cloud Account Setup</h2>
+<p>If you haven't already, sign up for an Alibaba Cloud account: Sign up (https://www.alibabacloud.com).</p>
+<h2 id="step-2-access-compute-nest">Step 2: Access Compute Nest</h2>
+<p>Navigate to Compute Nest and locate the service for MultiversX Snapshotless Observing Squad</p>
+<h2 id="step-3-set-up-an-instance-and-its-parameters">Step 3: Set Up an Instance and Its Parameters</h2>
+<p>Configure the necessary parameters for the instance</p>
+<p>Service Instance Name: Provide a meaningful name for the instance.
+Instance Password: Create a secure password for the instance.</p>
+<h2 id="step-4-deploy-your-service">Step 4: Deploy Your Service</h2>
+<p>Review all configurations and accept the Terms of Service. Click Create Now to deploy your service.</p>
+<h2 id="step-5-integrate-with-the-multiversx-network">Step 5: Integrate with the MultiversX Network</h2>
+<p>Description:
+In order to integrate with the MultiversX Network and be able to broadcast transactions and query blockchain data in an optimized approach, one needs to set up an on-premises Observing Squad. An Observing Squad is defined as a set of N Observer Nodes (one for each Shard, including the Metachain) plus an MultiversX Proxy instance which will connect to these Observers and provide an HTTP API (by delegating requests to the Observers).
+The snapshotless mode allows you to quickly synchronize with the network and perform Rest API calls for retrieving real-time data from the blockchain, such as getting data of an address (GET /address/${address}), getting the balance of an address (GET /address/${address}/balance), sending transactions, performing Smart Contract Queries and many more .
+Full List of supported Operations can be found here : https://docs.multiversx.com/sdk-and-tools/proxy/#snaphotless-observers-support</p>
+<p>Getting started after deploying MultiversX Observing Squad
+A systemd service will start docker compose and run all the Multiversx Observers shards in snapshotless mode .
+Make sure to allow port 22 and 8079 in your security group settings.
+The following tools are available at this path : /opt/multiversx-observing-squad-tools/</p>
+<pre><code>./stop_stack.sh      #-- stops the observing squad stack
+./start_stack.sh     #-- starts the observing squad stack
+./check_stack_sync_status.sh    #-- get node syncronization status
+./check_stack_node_version.sh   #-- get stack version information
+./upgrade_stack.sh   #-- upgrade stack version
+</code></pre>
+<p>Once the stack is in sync you can query the proxy for information :</p>
+<pre><code>curl -s -k localhost:8079/network/config
+</code></pre>
+<p>Or via the public ip address of your instance on port 8079.
+Full list of supported operations in snapshotless mode can be found here: https://docs.multiversx.com/sdk-and-tools/proxy/#snaphotless-observers-support</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This tutorial has guided you through the comprehensive process of building a MultiversX Snapshotless Observing Squad service using Alibaba Cloud Compute Nest, and ECS. Following these steps will help you to quickly deploy MultiversX Snapshotless Observing Squad services on Alibaba Cloud</p>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.6.1
+  Docs Build Date UTC : 2024-10-29 01:22:06.686632+00:00
+  -->
+</body>
+</html>
